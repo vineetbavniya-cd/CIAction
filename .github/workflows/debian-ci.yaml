@@ -1,0 +1,23 @@
+# .github/workflows/debian-ci.yaml
+name: Debian CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-debian:
+    runs-on: [self-hosted, aws, ubuntu]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies (Debian/Ubuntu)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq curl git
+
+      - name: Run build
+        run: |
+          echo "Building project on Debian..."
