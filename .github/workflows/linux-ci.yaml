@@ -1,0 +1,23 @@
+# .github/workflows/linux-ci.yaml
+name: Linux CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    runs-on: [self-hosted, aws, ec2-user]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies (Amazon Linux)
+        run: |
+          sudo yum update -y
+          sudo yum install -y jq curl git make gcc
+
+      - name: Run build
+        run: |
+          echo "Building project on Linux..."
