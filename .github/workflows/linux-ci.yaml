@@ -16,16 +16,10 @@ jobs:
       - name: Install dependencies (Amazon Linux)
         run: |
           echo "[INFO] Installing dependencies..."
-          sudo yum update -y || true
+          sudo yum update -y 
           # Avoid pipeline failure if package already installed
-          sudo yum install -y jq curl git || true
+          sudo yum install git
           echo "[INFO] Dependencies installed successfully."
-
-      - name: Verify installed tools
-        run: |
-          jq --version
-          curl --version
-          git --version
 
       - name: Run build
         run: |
