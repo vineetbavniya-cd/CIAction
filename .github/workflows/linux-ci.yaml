@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies (Amazon Linux)
         run: |
           sudo yum update -y
-          sudo yum install -y jq curl git make gcc
+          sudo yum install -y jq curl git
 
       - name: Run build
         run: |
