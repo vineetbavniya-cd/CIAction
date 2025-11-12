@@ -11,13 +11,23 @@ jobs:
     runs-on: [self-hosted, aws, ec2-user]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install dependencies (Amazon Linux)
         run: |
-          sudo yum update -y
-          sudo yum install -y jq curl git
+          echo "[INFO] Installing dependencies..."
+          sudo yum update -y || true
+          # Avoid pipeline failure if package already installed
+          sudo yum install -y jq curl git || true
+          echo "[INFO] Dependencies installed successfully."
+
+      - name: Verify installed tools
+        run: |
+          jq --version
+          curl --version
+          git --version
 
       - name: Run build
         run: |
-          echo "Building project on Linux..."
+          echo "Building project on Amazon Linux..."
+          # put your build commands here
